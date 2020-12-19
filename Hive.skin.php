@@ -28,6 +28,8 @@ class SkinHive extends SkinTemplate
         parent::initPage($out);
         $out->addModules('skins.hive.js');
         /* 'skins.foobar.js' is the name you used in your skin.json file */
+
+        $out->addMeta('viewport', 'width=device-width, initial-scale=1.0');
     }
 
     /**
@@ -67,9 +69,6 @@ class HiveTemplate extends BaseTemplate
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <div class="nav-link disabled">Home</div>
-                    </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="https://wiki.hive.gay/">Wiki<span
                                     class="sr-only"> (current)</span></a>
@@ -84,15 +83,127 @@ class HiveTemplate extends BaseTemplate
 
                     <ul id="personaltools">
                         <?php
-                        foreach ( $this->getPersonalTools() as $key => $item ) {
-                            echo $this->makeListItem( $key, $item );
+                        foreach ($this->getPersonalTools() as $key => $item) {
+                            echo $this->makeListItem($key, $item);
                         }
                         ?>
                     </ul>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col">
+
+                            <ul class="nav nav-tabs">
+                                <?php
+                                foreach ($this->data['content_navigation']['namespaces'] as $key => $tab) {
+                                    if ($tab['redundant'] == false) {
+                                        $aOptions = ['class' => 'nav-link', 'href' => $tab['href']];
+                                        if ($tab['class'] == 'selected') {
+                                            $aOptions['class'] = 'nav-link active';
+                                        }
+                                        $aHref = Html::rawElement('a', $aOptions, $tab['text']);
+
+                                        $liOptions = ['class' => 'nav-item'];
+                                        echo Html::rawElement('li', $liOptions, $aHref);
+                                    }
+                                }
+
+                                $menuItemCount = count($this->data['content_navigation']['views']) + count($this->data['content_navigation']['actions']);
+
+                                if ($menuItemCount > 0) {
+                                    ?>
+                                    <li class="nav-item dropdown ml-auto">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+                                           role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
+                                        <div class="dropdown-menu">
+                                            <?php
+                                            foreach ($this->data['content_navigation']['views'] as $key => $tab) {
+                                                if ($tab['redundant'] == false) {
+                                                    $aOptions = ['class' => 'dropdown-item', 'href' => $tab['href']];
+                                                    if ($tab['class'] == 'selected') {
+                                                        $aOptions['class'] = 'dropdown-item active';
+                                                    }
+                                                    echo Html::rawElement('a', $aOptions, $tab['text']);
+
+                                                }
+                                            }
+
+                                            if (count($this->data['content_navigation']['actions']) > 0) {
+                                                echo '<div class="dropdown-divider"></div>';
+                                                foreach ($this->data['content_navigation']['actions'] as $key => $tab) {
+                                                    if ($tab['redundant'] == false) {
+                                                        $aOptions = ['class' => 'dropdown-item', 'href' => $tab['href']];
+                                                        if ($tab['class'] == 'selected') {
+                                                            $aOptions['class'] = 'dropdown-item active';
+                                                        }
+                                                        echo Html::rawElement('a', $aOptions, $tab['text']);
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h1><?php $this->html('title'); ?></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <?php $this->html('bodytext'); ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-muted">
+                            <ul id="infolinks">
+                                <?php
+                                foreach ( $this->getFooterLinks()['info'] as $key ) { ?>
+                                    <li><?php $this->html( $key ) ?></li>
+
+                                    <?php
+                                } ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul id="footerlinks">
+                                <?php
+                                foreach ( $this->getFooterLinks()['places'] as $key ) { ?>
+                                    <li><?php $this->html( $key ) ?></li>
+
+                                    <?php
+                                } ?>
+                            </ul>
+                        </div>
+                        <div class="col text-right">
+                            <ul id="footericons">
+                                <?php
+                                foreach ( $this->getFooterIcons( 'icononly' ) as $blockName => $footerIcons ) { ?>
+                                    <li>
+                                        <?php
+                                        foreach ( $footerIcons as $icon ) {
+                                            echo $this->getSkin()->makeFooterIcon( $icon );
+                                        }
+                                        ?>
+                                    </li>
+                                    <?php
+                                } ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 order-first">
                     <div class="text-center">
                         <a
                                 href="<?php
@@ -140,82 +251,6 @@ class HiveTemplate extends BaseTemplate
                         </div>
                     <?php } ?>
 
-                </div>
-                <div class="col-md-9">
-                    <div class="row">
-                        <div class="col">
-
-                            <ul class="nav nav-tabs">
-                                <?php
-                                foreach ($this->data['content_navigation']['namespaces'] as $key => $tab) {
-                                    if ($tab['redundant'] == false) {
-                                        $aOptions = ['class' => 'nav-link', 'href' => $tab['href']];
-                                        if ($tab['class'] == 'selected') {
-                                            $aOptions['class'] = 'nav-link active';
-                                        }
-                                        $aHref = Html::rawElement('a', $aOptions, $tab['text']);
-
-                                        $liOptions = ['class' => 'nav-item'];
-                                        echo Html::rawElement('li', $liOptions, $aHref);
-                                    }
-                                }
-
-                                $menuItemCount = count($this->data['content_navigation']['views']) + count($this->data['content_navigation']['actions']);
-                                //echo Html::rawElement( 'p', [], $menuItemCount );
-
-                                if ($menuItemCount > 0) {
-                                    ?>
-                                    <li class="nav-item dropdown ml-auto">
-                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                                           role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
-                                        <div class="dropdown-menu">
-                                            <?php
-                                            foreach ($this->data['content_navigation']['views'] as $key => $tab) {
-                                                if ($tab['redundant'] == false) {
-                                                    $aOptions = ['class' => 'dropdown-item', 'href' => $tab['href']];
-                                                    if ($tab['class'] == 'selected') {
-                                                        $aOptions['class'] = 'dropdown-item active';
-                                                    }
-                                                    echo Html::rawElement('a', $aOptions, $tab['text']);
-
-                                                }
-                                            }
-
-                                            if (count($this->data['content_navigation']['actions']) > 0) {
-                                                echo '<div class="dropdown-divider"></div>';
-                                                foreach ($this->data['content_navigation']['actions'] as $key => $tab) {
-                                                    if ($tab['redundant'] == false) {
-                                                        $aOptions = ['class' => 'dropdown-item', 'href' => $tab['href']];
-                                                        if ($tab['class'] == 'selected') {
-                                                            $aOptions['class'] = 'dropdown-item active';
-                                                        }
-                                                        echo Html::rawElement('a', $aOptions, $tab['text']);
-
-                                                    }
-                                                }
-                                            }
-                                            ?>
-
-                                            <a class="dropdown-item" href="#">Separated link</a>
-                                        </div>
-                                    </li>
-                                    <?php
-                                }
-                                ?>
-                            </ul>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h1><?php $this->html('title'); ?></h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <?php $this->html('bodytext'); ?>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
