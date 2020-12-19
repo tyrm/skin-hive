@@ -36,8 +36,7 @@ class SkinHive extends SkinTemplate {
 	function setupSkinUserCss( OutputPage $out ) {
 		parent::setupSkinUserCss( $out );
 		$out->addModuleStyles( array(
-			'mediawiki.skinning.interface', 'skins.hive'
-			/* 'skins.foobar' is the name you used in your skin.json file */
+			'skins.hive'
 		) );
 	}
 }
@@ -93,9 +92,42 @@ class HiveTemplate extends BaseTemplate {
 	>
       </a>
       </div>
+
+<?php
+foreach ( $this->getSidebar() as $boxName => $box ) { ?>
+<div id="<?php echo Sanitizer::escapeId( $box['id'] ) ?>"<?php echo Linker::tooltip( $box['id'] ) ?>>
+	<h5><?php echo htmlspecialchars( $box['header'] ); ?></h5>
+	 <!-- If you do not want the words "Navigation" or "Tools" to appear, you can safely remove the line above. -->
+
+<?php
+	if ( is_array( $box['content'] ) ) { ?>
+	<ul>
+<?php
+		foreach ( $box['content'] as $key => $item ) {
+			echo $this->makeListItem( $key, $item );
+		}
+?>
+	</ul>
+<?php
+	} else {
+		echo $box['content'];
+	}
+?>
+</div>
+<?php } ?>
+
     </div>
     <div class="col-md-9">
-      One of three columns
+      <div class="row">
+        <div class="col">
+	  <h1><?php $this->html( 'title' ); ?></h1>
+	</div>
+      </div>
+      <div class="row">
+        <div class="col">
+	  <?php $this->html( 'bodytext' ); ?>
+        </div>
+      </div>
     </div>
   </div>
 </div>

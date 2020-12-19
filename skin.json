@@ -16,7 +16,7 @@
 	"ResourceModules": {
 		"skins.hive": {
 			"styles": {
-				"resources/bootstrap-darkly-4.5.3.min.css": { "media": "screen" }
+				"resources/bootstrap-darkly-4.5.3.min.css": {}
 			}
 		},
 		"skins.hive.js": {
