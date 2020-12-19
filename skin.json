@@ -1,0 +1,34 @@
+{
+	"name": "Hive",
+	"author": "The Hive",
+	"descriptionmsg": "hive-desc",
+	"namemsg": "skinname-hive",
+	"type": "skin",
+	"ValidSkinNames": {
+		"hive": "Hive"
+	},
+	"AutoloadClasses": {
+		"SkinHive": "Hive.skin.php"
+	},
+	"MessagesDirs": {
+		"Hive": "i18n"
+	},
+	"ResourceModules": {
+		"skins.hive": {
+			"styles": {
+				"resources/bootstrap-darkly-4.5.3.min.css": { "media": "screen" }
+			}
+		},
+		"skins.hive.js": {
+			"scripts": [
+				"resources/bootstrap-4.5.3.bundle.min.js"
+			],
+			"position": "bottom",
+			"dependencies": "jquery"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "Hive"
+	}
+}
