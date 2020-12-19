@@ -100,6 +100,13 @@ class HiveTemplate extends BaseTemplate
                         </a>
                     </div>
 
+
+<form action="<?php $this->text( 'wgScript' ); ?>">
+	<input type="hidden" name="title" value="<?php $this->text( 'searchtitle' ) ?>" />
+        <?php echo $this->makeSearchInput(); ?>
+</form>
+
+
                     <?php
                     foreach ($this->getSidebar() as $boxName => $box) { ?>
                         <div id="<?php echo Sanitizer::escapeId($box['id']) ?>"<?php echo Linker::tooltip($box['id']) ?>>
@@ -125,6 +132,47 @@ class HiveTemplate extends BaseTemplate
 
                 </div>
                 <div class="col-md-9">
+                    <div class="row">
+                        <div class="col">
+
+
+<ul class="nav nav-tabs">
+<?php
+	foreach ( $this->data['content_navigation']['namespaces'] as $key => $tab ) {
+		if ($tab['redundant'] == false) {
+			$aOptions = [ 'class' => 'nav-link', 'href' => $tab['href'] ];
+			if ($tab['class'] == 'selected') {
+				$aOptions['class'] = 'nav-link active';
+			}
+			$aHref = Html::rawElement( 'a', $aOptions, $tab['text'] );
+	
+			$liOptions = [ 'class' => 'nav-item' ];
+			echo Html::rawElement( 'li', $liOptions, $aHref );
+		}	
+	}
+
+	$menuItemCount = count($this->data['content_navigation']['views']) + count($this->data['content_navigation']['actions']);
+	//echo Html::rawElement( 'p', [], $menuItemCount );
+
+	if ($menuItemCount > 0) {
+?>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </li>
+<?php 
+	}
+?>
+</ul>
+
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <h1><?php $this->html('title'); ?></h1>
