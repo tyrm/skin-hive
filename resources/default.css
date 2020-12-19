@@ -1,0 +1,12 @@
+ul#personaltools li {
+    display: inline;
+    margin-left: 10px;
+}
+
+.mw-editsection {
+    float: right;
+}
+
+.printfooter {
+    visibility: hidden;
+}

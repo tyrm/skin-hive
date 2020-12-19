@@ -80,6 +80,18 @@ class HiveTemplate extends BaseTemplate
 
         <div class="container">
             <div class="row">
+                <div class="col text-right">
+
+                    <ul id="personaltools">
+                        <?php
+                        foreach ( $this->getPersonalTools() as $key => $item ) {
+                            echo $this->makeListItem( $key, $item );
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-3">
                     <div class="text-center">
                         <a
@@ -100,12 +112,10 @@ class HiveTemplate extends BaseTemplate
                         </a>
                     </div>
 
-
-<form action="<?php $this->text( 'wgScript' ); ?>">
-	<input type="hidden" name="title" value="<?php $this->text( 'searchtitle' ) ?>" />
-        <?php echo $this->makeSearchInput(); ?>
-</form>
-
+                    <form action="<?php $this->text('wgScript'); ?>">
+                        <input type="hidden" name="title" value="<?php $this->text('searchtitle') ?>"/>
+                        <?php echo $this->makeSearchInput(); ?>
+                    </form>
 
                     <?php
                     foreach ($this->getSidebar() as $boxName => $box) { ?>
@@ -135,41 +145,64 @@ class HiveTemplate extends BaseTemplate
                     <div class="row">
                         <div class="col">
 
+                            <ul class="nav nav-tabs">
+                                <?php
+                                foreach ($this->data['content_navigation']['namespaces'] as $key => $tab) {
+                                    if ($tab['redundant'] == false) {
+                                        $aOptions = ['class' => 'nav-link', 'href' => $tab['href']];
+                                        if ($tab['class'] == 'selected') {
+                                            $aOptions['class'] = 'nav-link active';
+                                        }
+                                        $aHref = Html::rawElement('a', $aOptions, $tab['text']);
 
-<ul class="nav nav-tabs">
-<?php
-	foreach ( $this->data['content_navigation']['namespaces'] as $key => $tab ) {
-		if ($tab['redundant'] == false) {
-			$aOptions = [ 'class' => 'nav-link', 'href' => $tab['href'] ];
-			if ($tab['class'] == 'selected') {
-				$aOptions['class'] = 'nav-link active';
-			}
-			$aHref = Html::rawElement( 'a', $aOptions, $tab['text'] );
-	
-			$liOptions = [ 'class' => 'nav-item' ];
-			echo Html::rawElement( 'li', $liOptions, $aHref );
-		}	
-	}
+                                        $liOptions = ['class' => 'nav-item'];
+                                        echo Html::rawElement('li', $liOptions, $aHref);
+                                    }
+                                }
 
-	$menuItemCount = count($this->data['content_navigation']['views']) + count($this->data['content_navigation']['actions']);
-	//echo Html::rawElement( 'p', [], $menuItemCount );
+                                $menuItemCount = count($this->data['content_navigation']['views']) + count($this->data['content_navigation']['actions']);
+                                //echo Html::rawElement( 'p', [], $menuItemCount );
 
-	if ($menuItemCount > 0) {
-?>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Separated link</a>
-    </div>
-  </li>
-<?php 
-	}
-?>
-</ul>
+                                if ($menuItemCount > 0) {
+                                    ?>
+                                    <li class="nav-item dropdown ml-auto">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+                                           role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
+                                        <div class="dropdown-menu">
+                                            <?php
+                                            foreach ($this->data['content_navigation']['views'] as $key => $tab) {
+                                                if ($tab['redundant'] == false) {
+                                                    $aOptions = ['class' => 'dropdown-item', 'href' => $tab['href']];
+                                                    if ($tab['class'] == 'selected') {
+                                                        $aOptions['class'] = 'dropdown-item active';
+                                                    }
+                                                    echo Html::rawElement('a', $aOptions, $tab['text']);
+
+                                                }
+                                            }
+
+                                            if (count($this->data['content_navigation']['actions']) > 0) {
+                                                echo '<div class="dropdown-divider"></div>';
+                                                foreach ($this->data['content_navigation']['actions'] as $key => $tab) {
+                                                    if ($tab['redundant'] == false) {
+                                                        $aOptions = ['class' => 'dropdown-item', 'href' => $tab['href']];
+                                                        if ($tab['class'] == 'selected') {
+                                                            $aOptions['class'] = 'dropdown-item active';
+                                                        }
+                                                        echo Html::rawElement('a', $aOptions, $tab['text']);
+
+                                                    }
+                                                }
+                                            }
+                                            ?>
+
+                                            <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
 
                         </div>
                     </div>
