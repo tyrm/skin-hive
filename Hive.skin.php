@@ -225,7 +225,7 @@ class HiveTemplate extends BaseTemplate
 
                     <form action="<?php $this->text('wgScript'); ?>">
                         <input type="hidden" name="title" value="<?php $this->text('searchtitle') ?>"/>
-                        <?php echo $this->makeSearchInput(); ?>
+                        <?php echo $this->makeSearchInput(array( 'class' => 'form-control mt-1 mb-3' )); ?>
                     </form>
 
                     <?php

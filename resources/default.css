@@ -1,4 +1,5 @@
-ul#footericons {
+
+ul#footericons, ul#footerlinks, ul#infolinks  {
     padding-inline-start: 0px;
 }
 
@@ -8,23 +9,9 @@ ul#footericons li {
     white-space: nowrap;
 }
 
-ul#footerlinks {
-    padding-inline-start: 0px;
-}
-
-ul#footerlinks li {
+ul#footerlinks li, ul#infolinks li {
     display: inline;
-    margin-left: 7px;
-    white-space: nowrap;
-}
-
-ul#infolinks {
-    padding-inline-start: 0px;
-}
-
-ul#infolinks li {
-    display: inline;
-    margin-left: 7px;
+    margin-right: 7px;
     white-space: nowrap;
 }
 
@@ -42,6 +29,18 @@ ul#personaltools li {
     float: right;
 }
 
+.mw-rcfilters-ui-changesListWrapperWidget .mw-changeslist-legend {
+    background-color: #222 !important;
+}
+
 .printfooter {
     visibility: hidden;
+}
+#pagehistory {
+    padding-inline-start: 0px;
+}
+
+#pagehistory li.selected {
+    color: white;
+    background-color: #444;
 }
