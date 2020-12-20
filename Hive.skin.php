@@ -78,7 +78,7 @@ class HiveTemplate extends BaseTemplate
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col text-right">
 
@@ -92,7 +92,7 @@ class HiveTemplate extends BaseTemplate
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-9 col-xl-10">
                     <div class="row">
                         <div class="col">
 
@@ -206,7 +206,7 @@ class HiveTemplate extends BaseTemplate
                     </div>
                 </div>
 
-                <div class="col-md-3 order-first">
+                <div class="col-md-3 col-xl-2 order-first">
                     <div class="text-center">
                         <a
                                 href="<?php
