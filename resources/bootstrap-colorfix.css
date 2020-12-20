@@ -11,6 +11,10 @@ a:visited  {
     background-color: rgba(255, 255, 255, 0.075) !important;
 }
 
+.dropdown-item:visited {
+    color: #fff !important;
+}
+
 .mw-rcfilters-ui-changesListWrapperWidget .mw-changeslist-legend {
     background-color: #222 !important;
 }
