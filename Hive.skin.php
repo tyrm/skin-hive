@@ -30,7 +30,7 @@ class SkinHive extends SkinTemplate
         /* 'skins.foobar.js' is the name you used in your skin.json file */
 
         $out->addMeta('viewport', 'width=device-width, initial-scale=1.0');
-        $out->addLink( array('rel'=> 'icon', 'type'=>'image/png', 'href'=>'https://wiki.hive.gay/images/HiveLogo_160.png') );
+        $out->addLink(array('rel' => 'icon', 'type' => 'image/png', 'href' => 'https://wiki.hive.gay/images/HiveLogo_160.png'));
     }
 
     /**
@@ -163,24 +163,26 @@ class HiveTemplate extends BaseTemplate
                             <?php $this->html('bodytext'); ?>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col text-muted">
-                            <ul id="infolinks">
-                                <?php
-                                foreach ( $this->getFooterLinks()['info'] as $key ) { ?>
-                                    <li><?php $this->html( $key ) ?></li>
-
+                    <?php if (array_key_exists('info', $this->getFooterLinks())) { ?>
+                        <div class="row">
+                            <div class="col text-muted">
+                                <ul id="infolinks">
                                     <?php
-                                } ?>
-                            </ul>
+                                    foreach ($this->getFooterLinks()['info'] as $key) { ?>
+                                        <li><?php $this->html($key) ?></li>
+
+                                        <?php
+                                    } ?>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                     <div class="row">
                         <div class="col">
                             <ul id="footerlinks">
                                 <?php
-                                foreach ( $this->getFooterLinks()['places'] as $key ) { ?>
-                                    <li><?php $this->html( $key ) ?></li>
+                                foreach ($this->getFooterLinks()['places'] as $key) { ?>
+                                    <li><?php $this->html($key) ?></li>
 
                                     <?php
                                 } ?>
@@ -189,11 +191,11 @@ class HiveTemplate extends BaseTemplate
                         <div class="col text-right">
                             <ul id="footericons">
                                 <?php
-                                foreach ( $this->getFooterIcons( 'icononly' ) as $blockName => $footerIcons ) { ?>
+                                foreach ($this->getFooterIcons('icononly') as $blockName => $footerIcons) { ?>
                                     <li>
                                         <?php
-                                        foreach ( $footerIcons as $icon ) {
-                                            echo $this->getSkin()->makeFooterIcon( $icon );
+                                        foreach ($footerIcons as $icon) {
+                                            echo $this->getSkin()->makeFooterIcon($icon);
                                         }
                                         ?>
                                     </li>
@@ -226,7 +228,7 @@ class HiveTemplate extends BaseTemplate
 
                     <form action="<?php $this->text('wgScript'); ?>">
                         <input type="hidden" name="title" value="<?php $this->text('searchtitle') ?>"/>
-                        <?php echo $this->makeSearchInput(array( 'class' => 'form-control mt-1 mb-3' )); ?>
+                        <?php echo $this->makeSearchInput(array('class' => 'form-control mt-1 mb-3')); ?>
                     </form>
 
                     <?php
