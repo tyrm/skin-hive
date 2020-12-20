@@ -30,6 +30,7 @@ class SkinHive extends SkinTemplate
         /* 'skins.foobar.js' is the name you used in your skin.json file */
 
         $out->addMeta('viewport', 'width=device-width, initial-scale=1.0');
+        $out->addLink( array('rel'=> 'icon', 'type'=>'image/png', 'href'=>'https://wiki.hive.gay/images/HiveLogo_160.png') );
     }
 
     /**
