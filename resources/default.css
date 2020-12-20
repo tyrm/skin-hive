@@ -25,6 +25,10 @@ ul#personaltools li {
     white-space: nowrap;
 }
 
+ul#toptabs .nav-link {
+    padding: .5rem 1.5rem;
+}
+
 .mw-editsection {
     float: right;
 }

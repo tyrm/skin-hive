@@ -95,7 +95,7 @@ class HiveTemplate extends BaseTemplate
                     <div class="row">
                         <div class="col">
 
-                            <ul class="nav nav-tabs">
+                            <ul id="toptabs" class="nav nav-tabs">
                                 <?php
                                 foreach ($this->data['content_navigation']['namespaces'] as $key => $tab) {
                                     if ($tab['redundant'] == false) {
