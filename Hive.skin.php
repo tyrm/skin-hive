@@ -42,7 +42,7 @@ class SkinHive extends SkinTemplate
     {
         parent::setupSkinUserCss($out);
         $out->addModuleStyles(array(
-            'skins.hive'
+            'mediawiki.skinning.interface', 'skins.hive'
         ));
     }
 }
@@ -161,6 +161,11 @@ class HiveTemplate extends BaseTemplate
                     <div class="row">
                         <div class="col">
                             <?php $this->html('bodytext'); ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <?php $this->html('catlinks'); ?>
                         </div>
                     </div>
                     <?php if (array_key_exists('info', $this->getFooterLinks())) { ?>

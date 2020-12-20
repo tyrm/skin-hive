@@ -1,6 +1,9 @@
+#catlinks {
+    margin-bottom: 1rem;
+}
 
-ul#footericons, ul#footerlinks, ul#infolinks  {
-    padding-inline-start: 0px;
+ul#footericons, ul#footerlinks, ul#infolinks {
+    margin-left: 0px !important;
 }
 
 ul#footericons li {
@@ -33,18 +36,10 @@ ul#toptabs .nav-link {
     float: right;
 }
 
-.mw-rcfilters-ui-changesListWrapperWidget .mw-changeslist-legend {
-    background-color: #222 !important;
-}
-
 .printfooter {
     visibility: hidden;
 }
+
 #pagehistory {
     padding-inline-start: 0px;
-}
-
-#pagehistory li.selected {
-    color: white;
-    background-color: #444;
 }

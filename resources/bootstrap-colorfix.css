@@ -1,0 +1,37 @@
+h1, h2, h3, h4, h5, h6 {
+    color: white !important;
+}
+
+a:visited  {
+    color: #2a9fd6 !important;
+}
+
+.catlinks {
+    border: 1px solid grey !important;
+    background-color: rgba(255, 255, 255, 0.075) !important;
+}
+
+.mw-rcfilters-ui-changesListWrapperWidget .mw-changeslist-legend {
+    background-color: #222 !important;
+}
+
+.mw-parser-output a.external:visited {
+    color: #36b !important;
+}
+
+.nav-pills .nav-link, .nav-tabs .nav-link {
+    color: #fff !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5) !important;
+}
+
+.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
+    color: #fff !important;
+}
+
+#pagehistory li.selected {
+    color: white;
+    background-color: #444;
+}
