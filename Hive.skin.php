@@ -75,6 +75,7 @@ class HiveTemplate extends BaseTemplate
                                     class="sr-only"> (current)</span></a>
                     </li>
                 </ul>
+                <a class="btn btn-discord" href="https://discord.gg/vRSXKt6" target="_blank">Join our Discord</a>
             </div>
         </nav>
 

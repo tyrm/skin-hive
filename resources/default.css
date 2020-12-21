@@ -43,3 +43,10 @@ ul#toptabs .nav-link {
 #pagehistory {
     padding-inline-start: 0px;
 }
+
+/* discord button */
+.btn-discord, .btn-discord:visited {
+    color: #fff !important;
+    background-color: #7289da !important;
+    border-color: #fff !important;
+}
