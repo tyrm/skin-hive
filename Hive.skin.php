@@ -31,16 +31,6 @@ class SkinHive extends SkinTemplate
 
         $out->addMeta('viewport', 'width=device-width, initial-scale=1.0');
         $out->addLink(array('rel' => 'icon', 'type' => 'image/png', 'href' => '/images/HiveLogo_160.png'));
-    }
-
-    /**
-     * Add CSS via ResourceLoader
-     *
-     * @param OutputPage $out
-     */
-    function setupSkinUserCss(OutputPage $out)
-    {
-        parent::setupSkinUserCss($out);
         $out->addModuleStyles(array(
             'mediawiki.skinning.interface', 'skins.hive'
         ));
@@ -100,7 +90,8 @@ class HiveTemplate extends BaseTemplate
                             <ul id="toptabs" class="nav nav-tabs">
                                 <?php
                                 foreach ($this->data['content_navigation']['namespaces'] as $key => $tab) {
-                                    if ($tab['redundant'] == false) {
+                                    $redundant = $tab['redundant'] ?? false;
+                                    if ($redundant == false) {
                                         $aOptions = ['class' => 'nav-link', 'href' => $tab['href']];
                                         if ($tab['class'] == 'selected') {
                                             $aOptions['class'] = 'nav-link active';
@@ -122,7 +113,8 @@ class HiveTemplate extends BaseTemplate
                                         <div class="dropdown-menu">
                                             <?php
                                             foreach ($this->data['content_navigation']['views'] as $key => $tab) {
-                                                if ($tab['redundant'] == false) {
+                                                $redundant = $tab['redundant'] ?? false;
+                                                if ($redundant == false) {
                                                     $aOptions = ['class' => 'dropdown-item', 'href' => $tab['href']];
                                                     if ($tab['class'] == 'selected') {
                                                         $aOptions['class'] = 'dropdown-item active';
@@ -135,7 +127,8 @@ class HiveTemplate extends BaseTemplate
                                             if (count($this->data['content_navigation']['actions']) > 0) {
                                                 echo '<div class="dropdown-divider"></div>';
                                                 foreach ($this->data['content_navigation']['actions'] as $key => $tab) {
-                                                    if ($tab['redundant'] == false) {
+                                                    $redundant = $tab['redundant'] ?? false;
+                                                    if ($redundant == false) {
                                                         $aOptions = ['class' => 'dropdown-item', 'href' => $tab['href']];
                                                         if ($tab['class'] == 'selected') {
                                                             $aOptions['class'] = 'dropdown-item active';
@@ -239,7 +232,7 @@ class HiveTemplate extends BaseTemplate
 
                     <?php
                     foreach ($this->getSidebar() as $boxName => $box) { ?>
-                        <div id="<?php echo Sanitizer::escapeId($box['id']) ?>"<?php echo Linker::tooltip($box['id']) ?>>
+                        <div id="<?php echo Sanitizer::escapeIdForAttribute($box['id']) ?>"<?php echo Linker::tooltip($box['id']) ?>>
                             <h5><?php echo htmlspecialchars($box['header']); ?></h5>
                             <!-- If you do not want the words "Navigation" or "Tools" to appear, you can safely remove the line above. -->
 

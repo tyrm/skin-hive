@@ -1,6 +1,7 @@
 {
 	"name": "Hive",
 	"author": "The Hive",
+	"manifest_version": 2,
 	"descriptionmsg": "hive-desc",
 	"namemsg": "skinname-hive",
 	"type": "skin",
