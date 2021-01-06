@@ -4,6 +4,7 @@
 	"manifest_version": 2,
 	"descriptionmsg": "hive-desc",
 	"namemsg": "skinname-hive",
+	"license-name": "gpl-3.0",
 	"type": "skin",
 	"ValidSkinNames": {
 		"hive": "Hive"
