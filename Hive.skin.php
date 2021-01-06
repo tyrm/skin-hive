@@ -59,6 +59,26 @@ class HiveTemplate extends BaseTemplate
             </button>
 
             <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://hive.gay/">Home</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://auth.hive.gay/auth/realms/Hive/account/">Account</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://status.hive.gay/">Status Page</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://mail.hive.gay/">Webmail</a>
+                    </li>
+                </ul>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="https://wiki.hive.gay/">Wiki<span
